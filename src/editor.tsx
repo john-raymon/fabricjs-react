@@ -7,7 +7,7 @@ export interface FabricJSEditor {
   addCircle: () => void
   addRectangle: () => void
   addLine: () => void
-  addText: (text: string) => void
+  addText: (text: string, optionsObj: object) => void
   updateText: (text: string) => void
   deleteAll: () => void
   deleteSelected: () => void
@@ -55,9 +55,13 @@ const buildEditor = (
       })
       canvas.add(object)
     },
-    addText: (text: string) => {
+    addText: (text: string, optionsObj: object) => {
       // use stroke in text fill, fill default is most of the time transparent
-      const object = new fabric.Textbox(text, { ...TEXT, fill: strokeColor })
+      const object = new fabric.Textbox(text, {
+        ...TEXT,
+        ...optionsObj,
+        fill: strokeColor
+      })
       object.set({ text: text })
       canvas.add(object)
     },
